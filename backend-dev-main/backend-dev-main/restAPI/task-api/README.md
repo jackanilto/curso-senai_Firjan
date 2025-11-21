@@ -1,183 +1,144 @@
-📌 Task API — Fastify + Prisma + JWT
+Task API — Fastify + Prisma + JWT
 
-API de gerenciamento de tarefas (To-Do List) desenvolvida com Fastify, Prisma, JWT e SQLite.
-Projeto baseado nas aulas do curso SENAI/Firjan.
+A Task API é um projeto desenvolvido para estudos e prática de criação de APIs modernas utilizando Fastify, Prisma ORM, SQLite, JWT e documentação automática com Swagger.
+O objetivo principal é fornecer uma API completa para gerenciamento de tarefas (To-Do List) com autenticação, filtros e operações CRUD.
 
-🚀 Tecnologias utilizadas
+💻 Funcionalidades
 
-Node.js
+Autenticação JWT: Login e geração de token para acesso às rotas protegidas.
 
-Fastify
+CRUD de Tarefas:
 
-Prisma ORM
+Criar tarefas
 
-SQLite (banco padrão do curso)
+Listar tarefas
 
-JWT (Autenticação)
+Atualizar tarefas
 
-Swagger + Swagger UI
+Excluir tarefas
 
-UUID
+Filtros por status:
 
-Dotenv
+Tarefas concluídas
 
-Nodemailer
+Tarefas pendentes
 
-Nodemon
+Documentação via Swagger: Interface automática para testar rotas.
 
-📦 Instalação do projeto
-1️⃣ Clonar o repositório
-git clone https://github.com/SEU_REPOSITORIO/task-api.git
+Integração com SQLite via Prisma ORM.
+
+🛠️ Tecnologias
+
+Node.js — Plataforma principal
+
+Fastify — Framework backend
+
+Prisma ORM — Manipulação de banco de dados
+
+SQLite — Banco utilizado no curso
+
+JWT — Autenticação
+
+UUID — Identificação única
+
+Dotenv — Variáveis de ambiente
+
+Nodemailer — Envio de e-mails
+
+Swagger / Swagger UI — Documentação da API
+
+Nodemon — Hot reload no ambiente de desenvolvimento
+
+⚙️ Como Rodar o Projeto
+Requisitos
+
+Node.js 18+
+
+NPM ou Yarn
+
+Não é necessário instalar SQLite manualmente (Prisma cria o arquivo)
+
+📦 Instalação
+
+Clone o repositório:
+
+git clone https://github.com/SEU_USUARIO/task-api.git
+
+
+Acesse o diretório do projeto:
+
 cd task-api
 
-🔧 Instalar dependências
-npm install fastify @fastify/swagger @fastify/swagger-ui @fastify/cors dotenv uuid nodemailer fastify-jwt
 
-Prisma
-npm install prisma --save-dev
-npm install @prisma/client
+Instale as dependências:
 
-🗄️ Inicializar o Prisma + SQLite
+npm install
+
+🗄️ Configuração do Prisma
+
+Inicialize o Prisma:
+
 npx prisma init --datasource-provider sqlite
 
 
-Crie o banco e gere o client:
+Crie o banco e aplique o schema:
 
 npx prisma migrate dev --name init
+
+
+Gere o Prisma Client:
+
 npx prisma generate
 
-🧱 Estrutura inicial do projeto
-task-api/
- ├── prisma/
- │    ├── schema.prisma
- ├── src/
- │    ├── server.js
- │    ├── routes/
- │    │      ├── auth.js
- │    │      ├── tasks.js
- │    ├── middlewares/
- │    │      ├── auth.js
- ├── .env
- ├── package.json
- ├── README.md
+🔐 Crie o arquivo .env
 
-⚙️ Scripts disponíveis
-
-Adicione ao package.json:
-
-"scripts": {
-  "dev": "nodemon src/server.js"
-}
-
-
-Rodar a aplicação:
-
-npm run dev
-
-🔐 Arquivo .env
-
-Crie um arquivo .env com:
+Crie um arquivo chamado .env na raiz e adicione:
 
 JWT_SECRET=supersecret
 PORT=3333
 
-📘 Rotas da API
-🔑 Autenticação (PÚBLICA)
-POST /login
+▶️ Executando o Servidor
 
-Realiza login e retorna um token JWT.
+Use o comando:
 
-Body:
-
-{
-  "email": "email@teste.com",
-  "password": "123456"
-}
-
-
-Resposta:
-
-{
-  "token": "JWT_GERADO_AQUI"
-}
-
-📝 Tasks (PROTEGIDAS)
-
-Necessita enviar o token no header:
-Authorization: Bearer SEU_TOKEN
-
-GET /tasks
-
-Lista todas as tarefas do usuário autenticado.
-
-POST /tasks
-{
-  "title": "Estudar Node.js",
-  "description": "Assistir aula 5",
-  "done": false
-}
-
-PUT /tasks/:id
-
-Atualiza a tarefa.
-
-DELETE /tasks/:id
-
-Remove a tarefa.
-
-GET /tasks/filter?status=done
-
-Retorna somente tarefas concluídas ou pendentes.
-
-🛡️ Middleware de Autenticação
-
-O middleware authMiddleware protege todas as rotas com prefixo /tasks.
-
-app.addHook("preHandler", authMiddleware);
-
-
-Se o token estiver incorreto ou ausente, retorna:
-
-{ "error": "Token inválido ou ausente" }
-
-📚 Documentação Swagger
-
-Acesse:
-
-http://localhost:3333/docs
-
-▶️ Como testar a API
-
-1️⃣ Fazer login
-2️⃣ Copiar o token JWT retornado
-3️⃣ Colar o token no header das chamadas protegidas:
-
-Authorization: Bearer SEU_TOKEN_AQUI
-
-
-4️⃣ Testar rotas no Postman, Insomnia ou Swagger UI.
-
-📂 Banco de dados (Prisma)
-
-Exemplo de modelo no schema.prisma:
-
-model Task {
-  id          String   @id @default(uuid())
-  title       String
-  description String?
-  done        Boolean  @default(false)
-  createdAt   DateTime @default(now())
-}
-
-🔥 Inicialização do servidor
 npm run dev
 
 
-Retorna:
+A API estará disponível em:
 
-{ "status": "API Tasks Online!" }
+http://localhost:3333
 
-🧑‍💻 Autor
 
-Projeto criado para fins didáticos no curso SENAI/Firjan.
-Desenvolvido por Janilto Oliveira.
+A documentação Swagger:
+
+http://localhost:3333/docs
+
+📘 Rotas Principais
+🔑 Autenticação
+
+POST /login → Retorna um token JWT.
+
+📝 Tarefas (todas protegidas por token JWT)
+
+GET /tasks → Lista todas as tarefas
+
+POST /tasks → Cria uma nova tarefa
+
+PUT /tasks/:id → Atualiza uma tarefa
+
+DELETE /tasks/:id → Remove uma tarefa
+
+GET /tasks/filter?status=done → Filtra tarefas concluídas ou pendentes
+
+Para acessar essas rotas, envie o header:
+Authorization: Bearer SEU_TOKEN_AQUI
+
+📝 Contribuições
+
+Este projeto tem foco educacional, mas contribuições são bem-vindas para melhoria do código ou adição de novas funcionalidades.
+Sinta-se à vontade para fazer fork, enviar pull requests ou abrir issues.
+
+📄 Licença
+
+Este projeto é de código aberto.
+Consulte o arquivo LICENSE caso exista no repositório.
