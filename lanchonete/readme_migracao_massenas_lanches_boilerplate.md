@@ -4,28 +4,21 @@
 
 ---
 
-## ✅ Como usar este checklist
-- Cada item tem uma checkbox `- [ ]` — marque quando concluído.
-- Os itens estão organizados em fases: Preparação, Backend, Frontend, Admin, Deploy, Testes e Pós‑deploy.
-- Se preferir, podemos transformar isso em issues no GitHub ou numa lista em Trello/Notion.
-
----
-
 # Fase 0 — Preparação
 
-- [ ] 0.1 Registrar/definir domínio (ex: `massenaslanches.com.br`) — *responsável: você*
+- [] 0.1 Registrar/definir domínio (ex: `massenaslanches.com.br`) — *responsável: você*
 - [ ] 0.2 Escolher provedor de hospedagem (compartilhada, VPS ou cloud) — *ex.: Hostinger/KingHost/Vultr*
 - [ ] 0.3 Criar conta de hospedagem e acessar painel (cPanel/SSH)
-- [ ] 0.4 Criar banco MySQL no painel e anotar credenciais (host, db, user, pass)
-- [ ] 0.5 Criar repositório Git (GitHub/GitLab/Bitbucket) e subir boilerplate
+- [x] 0.4 Criar banco MySQL no painel e anotar credenciais (host, db, user, pass)
+- [x] 0.5 Criar repositório Git (GitHub/GitLab/Bitbucket) e subir boilerplate
 
 ---
 
 # Fase 1 — Configuração do ambiente
 
-- [ ] 1.1 Ajustar `config/config.php` com credenciais do MySQL
+- [x] 1.1 Ajustar `config/config.php` com credenciais do MySQL
 - [ ] 1.2 Testar conexão com `api/db.php` — abrir no navegador e verificar ausência de erro
-- [ ] 1.3 Criar tabela `produtos` no banco (executar SQL fornecido no boilerplate)
+- [x] 1.3 Criar tabela `produtos` no banco (executar SQL fornecido no boilerplate)
 - [ ] 1.4 Subir imagens de exemplo em `public/img/` (ex: banner.jpg e imagens de produtos)
 
 ---
